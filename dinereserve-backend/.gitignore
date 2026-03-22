@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+ai/models/
+ai/datasets/
+*.pkl
+*.csv
+.DS_Store

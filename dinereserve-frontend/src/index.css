@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── FORCE DARK EVERYWHERE ── */
+html, body, #root {
+  background-color: #0c0d0f !important;
+  color: #e8e4de !important;
+  font-family: 'Jost', system-ui, sans-serif !important;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Override any white backgrounds that old CSS may set */
+body > *, #root > *, .App > * {
+  background-color: transparent;
+}
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --bg:          #0c0d0f;
+  --bg-1:        #141618;
+  --bg-2:        #1a1c20;
+  --bg-3:        #212428;
+  --border:      rgba(255,255,255,0.07);
+  --border-md:   rgba(255,255,255,0.12);
+  --border-lg:   rgba(255,255,255,0.18);
+  --gold:        #b89a6a;
+  --gold-lt:     #cdb48a;
+  --gold-dim:    rgba(184,154,106,0.12);
+  --gold-glow:   rgba(184,154,106,0.25);
+  --text-1:      #e8e4de;
+  --text-2:      #8f8b84;
+  --text-3:      #4a4844;
+  --success:     #5a9e7a;
+  --success-bg:  rgba(90,158,122,0.1);
+  --danger:      #c46060;
+  --danger-bg:   rgba(196,96,96,0.1);
+  --warning:     #c49a50;
+  --warning-bg:  rgba(196,154,80,0.1);
+  --r-sm:        6px;
+  --r-md:        12px;
+  --r-lg:        18px;
+  --r-xl:        24px;
+  --ease:        cubic-bezier(0.4,0,0.2,1);
+  --font-serif:  'Cormorant Garamond', Georgia, serif;
+  --font-sans:   'Jost', system-ui, sans-serif;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg-3); border-radius: 3px; }
+
+/* ── LINKS ── */
+a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--gold-lt); }
+
+/* ── INPUTS ── */
+input, select, textarea {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg-3) !important;
+  border: 1px solid var(--border-md) !important;
+  border-radius: var(--r-sm);
+  color: var(--text-1) !important;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+input::placeholder, textarea::placeholder { color: var(--text-3); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+select option { background: var(--bg-2); color: var(--text-1); }
+
+/* ── BUTTONS ── */
+button {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 11px 22px;
+  transition: all 0.2s var(--ease);
+  letter-spacing: 0.03em;
+}
+
+/* ── PAGE WRAPPER — used on every page that doesn't have its own bg ── */
+.dr-page {
+  min-height: 100vh;
+  background: var(--bg) !important;
+  padding: 36px 24px;
+}
+.dr-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* ── CARD ── */
+.dr-card {
+  background: var(--bg-1) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+}
+
+/* ── SECTION TITLE ── */
+.dr-title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.dr-subtitle {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+/* ── BADGE ── */
+.dr-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.dr-badge-gold    { background: var(--gold-dim);    color: var(--gold); }
+.dr-badge-success { background: var(--success-bg);  color: var(--success); }
+.dr-badge-danger  { background: var(--danger-bg);   color: var(--danger); }
+.dr-badge-warn    { background: var(--warning-bg);  color: var(--warning); }
+.dr-badge-muted   { background: var(--bg-3);        color: var(--text-2); }
+
+/* ── DIVIDER ── */
+.dr-divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+/* ── TABLE ── */
+.dr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dr-table th {
+  text-align: left; padding: 10px 16px;
+  color: var(--text-3); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.dr-table td {
+  padding: 13px 16px; color: var(--text-2);
+  border-bottom: 1px solid var(--border);
+}
+.dr-table tr:hover td { background: var(--bg-2); }
+
+/* ── STAT CARD ── */
+.dr-stat {
+  background: var(--bg-1) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 22px;
+  transition: border-color 0.2s;
+}
+.dr-stat:hover { border-color: var(--border-md); }
+.dr-stat-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 10px;
+}
+.dr-stat-val {
+  font-family: var(--font-serif);
+  font-size: 32px; color: var(--text-1); line-height: 1;
+}
+.dr-stat-gold .dr-stat-val { color: var(--gold); }

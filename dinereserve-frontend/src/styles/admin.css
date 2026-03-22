@@ -1,0 +1,207 @@
+/* admin.css — AdminDashboard, ManageTables, Reports */
+
+.admin-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.admin-header {
+  margin-bottom: 28px;
+}
+.admin-header h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.admin-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Stat cards grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: border-color var(--transition);
+}
+.stat-card:hover { border-color: var(--border-strong); }
+.stat-card-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.stat-card-accent .stat-card-value { color: var(--accent); }
+
+/* Admin section panel */
+.admin-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.admin-section h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.admin-section .section-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Manage Tables */
+.add-table-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.add-table-row input {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+.add-table-row button {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #0e0f11;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+.add-table-row button:hover { background: var(--accent-hover); }
+
+.table-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+.table-list-item strong { color: var(--text-primary); font-size: 14px; }
+.table-list-item span  { font-size: 13px; color: var(--text-secondary); }
+.table-status-available { color: var(--success); font-weight: 500; font-size: 13px; }
+.table-status-booked    { color: var(--warning); font-weight: 500; font-size: 13px; }
+
+/* Admin buttons */
+.admin-btn {
+  padding: 9px 18px;
+  background: var(--accent);
+  color: #0e0f11;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.admin-btn:hover { background: var(--accent-hover); }
+.admin-btn-ghost {
+  padding: 9px 18px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.admin-btn-ghost:hover {
+  background: var(--bg-overlay);
+  color: var(--text-primary);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Peak hour bar chart */
+.peak-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+.peak-bar-label {
+  width: 72px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: right;
+  flex-shrink: 0;
+}
+.peak-bar-track {
+  flex: 1;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+  height: 22px;
+  overflow: hidden;
+}
+.peak-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  background: var(--accent);
+  opacity: 0.85;
+}
+.peak-bar-fill.peak { background: var(--danger); opacity: 1; }
+.peak-bar-info {
+  width: 100px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.peak-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--danger);
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* Reports select */
+.reports-select {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 9px 12px;
+  font-size: 14px;
+}
+.analyse-btn {
+  padding: 9px 20px;
+  background: var(--accent);
+  color: #0e0f11;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.analyse-btn:hover { background: var(--accent-hover); }
+.analyse-btn:disabled {
+  background: var(--bg-overlay);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+}
+
+canvas { max-width: 100%; }

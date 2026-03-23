@@ -49,4 +49,4 @@ DineReserve is a restaurant reservation application that allows users to easily 
 This project is licensed under the MIT License.
 
 ## Contact
-For inquiries, please contact [Your Name] at [Your Email].
+For inquiries, please contact Vanshika Agarwal at vanshikaagarwal9500gmail.com

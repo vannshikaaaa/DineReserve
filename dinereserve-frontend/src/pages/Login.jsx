@@ -11,20 +11,22 @@ const C = {
     fontFamily: "'Jost', sans-serif",
   },
   wrap: { width: "100%", maxWidth: "400px" },
-  brand: {
-    textAlign: "center", marginBottom: "40px",
-  },
+  brand: { textAlign: "center", marginBottom: "40px" },
   brandName: {
     fontFamily: "'Cormorant Garamond', Georgia, serif",
-    fontSize: "38px", fontWeight: "400", color: "#e8e4de",
+    fontSize: "clamp(28px, 7vw, 38px)",
+    fontWeight: "400", color: "#e8e4de",
     letterSpacing: "0.04em", display: "block", marginBottom: "6px",
   },
-  brandSub: { fontSize: "12px", color: "#4a4844", letterSpacing: "0.12em", textTransform: "uppercase" },
+  brandSub: {
+    fontSize: "12px", color: "#4a4844",
+    letterSpacing: "0.12em", textTransform: "uppercase",
+  },
   card: {
     background: "#141618",
     border: "1px solid rgba(255,255,255,0.09)",
     borderRadius: "20px",
-    padding: "40px",
+    padding: "clamp(24px, 5vw, 40px)",
     boxShadow: "0 24px 64px rgba(0,0,0,0.6)",
   },
   cardTitle: {
@@ -83,7 +85,7 @@ function FocusInput({ style, ...props }) {
 }
 
 function Login() {
-  const [form, setForm]   = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -106,11 +108,9 @@ function Login() {
           <span style={C.brandName}>DineReserve</span>
           <span style={C.brandSub}>Guest Portal</span>
         </div>
-
         <div style={C.card}>
           <h2 style={C.cardTitle}>Sign in</h2>
           {error && <div style={C.err}>{error}</div>}
-
           <form onSubmit={handleSubmit}>
             <div style={C.field}>
               <label style={C.label}>Email address</label>
@@ -136,7 +136,6 @@ function Login() {
               {loading ? "Signing in..." : "Sign in"}
             </button>
           </form>
-
           <div style={C.footer}>
             No account?{" "}
             <Link to="/register" style={{ color: "#b89a6a", fontWeight: "500" }}>Create one</Link>

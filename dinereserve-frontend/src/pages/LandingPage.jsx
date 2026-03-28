@@ -12,7 +12,12 @@ function LandingPage() {
       background: "#0e0f11",
       padding: "24px",
     }}>
-      <div style={{ textAlign: "center", maxWidth: "480px", width: "100%" }}>
+      <div style={{
+        textAlign: "center",
+        maxWidth: "480px",
+        width: "100%",
+        padding: "0 8px",
+      }}>
 
         {/* Brand mark */}
         <div style={{
@@ -31,21 +36,32 @@ function LandingPage() {
 
         <h1 style={{
           fontFamily: "'DM Serif Display', Georgia, serif",
-          fontSize: "48px", fontWeight: "400",
-          color: "#f0ede8", letterSpacing: "-0.02em",
-          lineHeight: "1.1", marginBottom: "12px",
+          fontSize: "clamp(32px, 8vw, 48px)",
+          fontWeight: "400",
+          color: "#f0ede8",
+          letterSpacing: "-0.02em",
+          lineHeight: "1.1",
+          marginBottom: "12px",
         }}>
           DineReserve
         </h1>
 
         <p style={{
-          fontSize: "16px", color: "#9a9590",
-          marginBottom: "48px", lineHeight: "1.6",
+          fontSize: "clamp(14px, 3.5vw, 16px)",
+          color: "#9a9590",
+          marginBottom: "40px",
+          lineHeight: "1.6",
         }}>
           Effortless restaurant reservations,<br />powered by AI
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          maxWidth: "320px",
+          margin: "0 auto",
+        }}>
           <button
             onClick={() => navigate("/login")}
             style={{
@@ -54,12 +70,13 @@ function LandingPage() {
               color: "#0e0f11",
               border: "none",
               borderRadius: "8px",
-              fontSize: "15px",
+              fontSize: "clamp(14px, 3.5vw, 15px)",
               fontWeight: "600",
               cursor: "pointer",
               fontFamily: "inherit",
               letterSpacing: "0.01em",
               transition: "all 0.2s ease",
+              width: "100%",
             }}
             onMouseEnter={e => {
               e.currentTarget.style.background = "#d9bc8a";
@@ -83,11 +100,12 @@ function LandingPage() {
               color: "#9a9590",
               border: "1px solid rgba(255,255,255,0.12)",
               borderRadius: "8px",
-              fontSize: "15px",
+              fontSize: "clamp(14px, 3.5vw, 15px)",
               fontWeight: "400",
               cursor: "pointer",
               fontFamily: "inherit",
               transition: "all 0.2s ease",
+              width: "100%",
             }}
             onMouseEnter={e => {
               e.currentTarget.style.background = "rgba(255,255,255,0.04)";
@@ -106,7 +124,7 @@ function LandingPage() {
 
         <p style={{
           marginTop: "40px",
-          fontSize: "12px",
+          fontSize: "11px",
           color: "#5a5752",
           letterSpacing: "0.04em",
         }}>

@@ -59,7 +59,7 @@ function MyBookings() {
     try {
       const res  = await API.get("/customer/bookings");
       const data = res.data || [];
-      setBookings(data);
+       setBookings(data);
       const upcoming = data.filter(b => b.status === "Pending" || b.status === "confirmed");
       if (upcoming.length > 0) await fetchAllRisks(upcoming);
     } catch (err) {

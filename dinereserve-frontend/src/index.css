@@ -2,7 +2,6 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── FORCE DARK EVERYWHERE ── */
 html, body, #root {
   background-color: #0c0d0f !important;
   color: #e8e4de !important;
@@ -13,12 +12,10 @@ html, body, #root {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Override any white backgrounds that old CSS may set */
 body > *, #root > *, .App > * {
   background-color: transparent;
 }
 
-/* ── DESIGN TOKENS ── */
 :root {
   --bg:          #0c0d0f;
   --bg-1:        #141618;
@@ -49,16 +46,13 @@ body > *, #root > *, .App > * {
   --font-sans:   'Jost', system-ui, sans-serif;
 }
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--bg-3); border-radius: 3px; }
 
-/* ── LINKS ── */
 a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
 a:hover { color: var(--gold-lt); }
 
-/* ── INPUTS ── */
 input, select, textarea {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -79,7 +73,6 @@ input:focus, select:focus, textarea:focus {
 }
 select option { background: var(--bg-2); color: var(--text-1); }
 
-/* ── BUTTONS ── */
 button {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -92,7 +85,6 @@ button {
   letter-spacing: 0.03em;
 }
 
-/* ── PAGE WRAPPER — used on every page that doesn't have its own bg ── */
 .dr-page {
   min-height: 100vh;
   background: var(--bg) !important;
@@ -102,16 +94,12 @@ button {
   max-width: 1140px;
   margin: 0 auto;
 }
-
-/* ── CARD ── */
 .dr-card {
   background: var(--bg-1) !important;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 28px;
 }
-
-/* ── SECTION TITLE ── */
 .dr-title {
   font-family: var(--font-serif);
   font-size: 30px;
@@ -126,8 +114,6 @@ button {
   margin-bottom: 28px;
   letter-spacing: 0.01em;
 }
-
-/* ── BADGE ── */
 .dr-badge {
   display: inline-block;
   padding: 3px 10px;
@@ -143,10 +129,8 @@ button {
 .dr-badge-warn    { background: var(--warning-bg);  color: var(--warning); }
 .dr-badge-muted   { background: var(--bg-3);        color: var(--text-2); }
 
-/* ── DIVIDER ── */
 .dr-divider { height: 1px; background: var(--border); margin: 20px 0; }
 
-/* ── TABLE ── */
 .dr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .dr-table th {
   text-align: left; padding: 10px 16px;
@@ -160,7 +144,6 @@ button {
 }
 .dr-table tr:hover td { background: var(--bg-2); }
 
-/* ── STAT CARD ── */
 .dr-stat {
   background: var(--bg-1) !important;
   border: 1px solid var(--border);
@@ -179,3 +162,41 @@ button {
   font-size: 32px; color: var(--text-1); line-height: 1;
 }
 .dr-stat-gold .dr-stat-val { color: var(--gold); }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+
+  html, body, #root {
+    font-size: 14px;
+  }
+
+  .dr-page {
+    padding: 16px 12px;
+  }
+  .dr-inner {
+    max-width: 100%;
+  }
+  .dr-card {
+    padding: 18px 14px;
+  }
+  .dr-title {
+    font-size: 22px;
+  }
+  .dr-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .dr-stat {
+    padding: 16px;
+  }
+  .dr-stat-val {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dr-page {
+    padding: 12px 10px;
+  }
+}

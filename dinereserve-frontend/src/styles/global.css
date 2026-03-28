@@ -1,13 +1,8 @@
-/* global.css — layout utilities and shared components */
-
-/* ── Page wrappers ───────────────────────── */
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px;
 }
-
-/* ── Section title ───────────────────────── */
 .page-title {
   font-family: var(--font-display);
   font-size: 28px;
@@ -16,8 +11,6 @@
   margin-bottom: 24px;
   letter-spacing: -0.01em;
 }
-
-/* ── Card surface ────────────────────────── */
 .card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -25,15 +18,11 @@
   padding: 24px;
   box-shadow: var(--shadow-sm);
 }
-
-/* ── Divider ─────────────────────────────── */
 .divider {
   height: 1px;
   background: var(--border);
   margin: 20px 0;
 }
-
-/* ── Badge / status pill ─────────────────── */
 .badge {
   display: inline-block;
   padding: 3px 10px;
@@ -48,7 +37,6 @@
 .badge-info    { background: var(--info-bg);    color: var(--info);    }
 .badge-muted   { background: var(--bg-elevated); color: var(--text-secondary); }
 
-/* ── Info box ────────────────────────────── */
 .info-box {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
@@ -58,8 +46,6 @@
   font-size: 14px;
   color: var(--text-secondary);
 }
-
-/* ── Empty state ─────────────────────────── */
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -70,8 +56,6 @@
   color: var(--text-secondary);
   margin-bottom: 8px;
 }
-
-/* ── Loading text ────────────────────────── */
 .loading-text {
   color: var(--text-muted);
   font-size: 14px;
@@ -79,7 +63,7 @@
   text-align: center;
 }
 
-/* ── Navbar ──────────────────────────────── */
+/* ── Navbar ── */
 .navbar {
   position: sticky;
   top: 0;
@@ -126,11 +110,9 @@
   border-color: var(--danger);
   color: var(--danger);
   background: var(--danger-bg);
-  transform: none;
-  box-shadow: none;
 }
 
-/* ── Table ───────────────────────────────── */
+/* ── Table ── */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -153,7 +135,7 @@
 }
 .data-table tr:hover td { background: var(--bg-elevated); }
 
-/* ── Stat card ───────────────────────────── */
+/* ── Stat card ── */
 .stat-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -172,4 +154,42 @@
   font-size: 30px;
   color: var(--text-primary);
   line-height: 1;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 16px 12px;
+  }
+  .page-title {
+    font-size: 20px;
+  }
+  .navbar {
+    padding: 0 16px;
+    height: 54px;
+  }
+  .navbar-links {
+    gap: 12px;
+  }
+  .navbar-links a {
+    font-size: 12px;
+  }
+  .navbar-logout {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+  .data-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .stat-card {
+    padding: 14px;
+  }
+  .stat-card-value {
+    font-size: 22px;
+  }
+  .empty-state {
+    padding: 40px 16px;
+  }
 }

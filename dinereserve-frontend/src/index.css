@@ -1,20 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── RESET & OVERFLOW FIX ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   overflow-x: hidden;
+  width: 100%;
   max-width: 100vw;
 }
 
 body {
   overflow-x: hidden;
+  width: 100%;
   max-width: 100vw;
+  position: relative;
 }
 
 #root {
   overflow-x: hidden;
+  width: 100%;
   max-width: 100vw;
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input, select, textarea, button {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 html, body, #root {
@@ -31,6 +52,7 @@ body > *, #root > *, .App > * {
   background-color: transparent;
 }
 
+/* ── DESIGN TOKENS ── */
 :root {
   --bg:          #0c0d0f;
   --bg-1:        #141618;
@@ -61,13 +83,16 @@ body > *, #root > *, .App > * {
   --font-sans:   'Jost', system-ui, sans-serif;
 }
 
+/* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--bg-3); border-radius: 3px; }
 
+/* ── LINKS ── */
 a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
 a:hover { color: var(--gold-lt); }
 
+/* ── INPUTS ── */
 input, select, textarea {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -88,6 +113,7 @@ input:focus, select:focus, textarea:focus {
 }
 select option { background: var(--bg-2); color: var(--text-1); }
 
+/* ── BUTTONS ── */
 button {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -98,23 +124,35 @@ button {
   padding: 11px 22px;
   transition: all 0.2s var(--ease);
   letter-spacing: 0.03em;
+  box-sizing: border-box;
 }
 
+/* ── PAGE WRAPPER ── */
 .dr-page {
   min-height: 100vh;
   background: var(--bg) !important;
   padding: 36px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 .dr-inner {
   max-width: 1140px;
   margin: 0 auto;
+  width: 100%;
 }
+
+/* ── CARD ── */
 .dr-card {
   background: var(--bg-1) !important;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 28px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+/* ── SECTION TITLE ── */
 .dr-title {
   font-family: var(--font-serif);
   font-size: 30px;
@@ -129,6 +167,8 @@ button {
   margin-bottom: 28px;
   letter-spacing: 0.01em;
 }
+
+/* ── BADGE ── */
 .dr-badge {
   display: inline-block;
   padding: 3px 10px;
@@ -144,8 +184,10 @@ button {
 .dr-badge-warn    { background: var(--warning-bg);  color: var(--warning); }
 .dr-badge-muted   { background: var(--bg-3);        color: var(--text-2); }
 
+/* ── DIVIDER ── */
 .dr-divider { height: 1px; background: var(--border); margin: 20px 0; }
 
+/* ── TABLE ── */
 .dr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .dr-table th {
   text-align: left; padding: 10px 16px;
@@ -159,12 +201,14 @@ button {
 }
 .dr-table tr:hover td { background: var(--bg-2); }
 
+/* ── STAT CARD ── */
 .dr-stat {
   background: var(--bg-1) !important;
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 22px;
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 .dr-stat:hover { border-color: var(--border-md); }
 .dr-stat-label {
@@ -190,6 +234,7 @@ button {
   }
   .dr-inner {
     max-width: 100%;
+    width: 100%;
   }
   .dr-card {
     padding: 18px 14px;

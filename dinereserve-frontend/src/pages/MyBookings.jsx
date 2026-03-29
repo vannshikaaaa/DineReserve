@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import API from "../api/axios";
 
-// ── Design tokens (guest — warm) ─────────────────────────────
 const BG   = "#0e0f0d";
 const S1   = "#151713";
 const S2   = "#1c1e1a";
@@ -24,16 +23,23 @@ const pill = (bg, color, border) => ({
 });
 
 function MyBookings() {
-  const [bookings, setBookings]       = useState([]);
-  const [loading, setLoading]         = useState(true);
-  const [riskScores, setRiskScores]   = useState({});
-  const [cancelRisks, setCancelRisks] = useState({});
-  const [reviewModal, setReviewModal]     = useState(null);
-  const [reviewText, setReviewText]       = useState("");
-  const [reviewRating, setReviewRating]   = useState(5);
+  const [bookings, setBookings]         = useState([]);
+  const [loading, setLoading]           = useState(true);
+  const [riskScores, setRiskScores]     = useState({});
+  const [cancelRisks, setCancelRisks]   = useState({});
+  const [reviewModal, setReviewModal]   = useState(null);
+  const [reviewText, setReviewText]     = useState("");
+  const [reviewRating, setReviewRating] = useState(5);
   const [reviewLoading, setReviewLoading] = useState(false);
-  const [reviewResult, setReviewResult]   = useState(null);
-  const [submittedIds, setSubmittedIds]   = useState([]);
+  const [reviewResult, setReviewResult] = useState(null);
+  const [submittedIds, setSubmittedIds] = useState([]);
+  const [isMobile, setIsMobile]         = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const fetchAllRisks = useCallback(async (list) => {
     const ns = {}, cs = {};
@@ -59,7 +65,7 @@ function MyBookings() {
     try {
       const res  = await API.get("/customer/bookings");
       const data = res.data || [];
-       setBookings(data);
+      setBookings(data);
       const upcoming = data.filter(b => b.status === "Pending" || b.status === "confirmed");
       if (upcoming.length > 0) await fetchAllRisks(upcoming);
     } catch (err) {
@@ -76,8 +82,8 @@ function MyBookings() {
     try {
       await API.delete(`/customer/bookings/${id}`);
       setBookings(p => p.filter(b => b.booking_id !== id));
-      setRiskScores(p => { const u = {...p}; delete u[id]; return u; });
-      setCancelRisks(p => { const u = {...p}; delete u[id]; return u; });
+      setRiskScores(p => { const u = { ...p }; delete u[id]; return u; });
+      setCancelRisks(p => { const u = { ...p }; delete u[id]; return u; });
     } catch (err) { alert(err.response?.data?.detail || "Failed to cancel"); }
   };
 
@@ -99,7 +105,6 @@ function MyBookings() {
     finally { setReviewLoading(false); }
   };
 
-  // ── Badges ────────────────────────────────────────────────
   const riskBadge = (score, type) => {
     if (!score) return null;
     const cfg = {
@@ -145,9 +150,9 @@ function MyBookings() {
 
   return (
     <div style={{ minHeight: "100vh", background: BG, fontFamily: SANS, paddingBottom: "60px" }}>
-      <div style={{ maxWidth: "720px", margin: "0 auto", padding: "40px 24px" }}>
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "24px 16px" : "40px 24px" }}>
 
-        <h1 style={{ fontFamily: SERIF, fontSize: "30px", fontWeight: "400", color: T1, marginBottom: "6px", letterSpacing: "-0.01em" }}>
+        <h1 style={{ fontFamily: SERIF, fontSize: isMobile ? "24px" : "30px", fontWeight: "400", color: T1, marginBottom: "6px", letterSpacing: "-0.01em" }}>
           My Bookings
         </h1>
         <p style={{ fontSize: "13px", color: T3, marginBottom: "32px" }}>
@@ -164,22 +169,27 @@ function MyBookings() {
         {bookings.map((b) => (
           <div key={b.booking_id} style={{
             background: S1, border: `1px solid ${BRD}`, borderRadius: "14px",
-            padding: "20px 22px", marginBottom: "14px",
+            padding: isMobile ? "16px" : "20px 22px", marginBottom: "14px",
             transition: "border-color 0.2s",
           }}
             onMouseEnter={e => e.currentTarget.style.borderColor = BRD2}
             onMouseLeave={e => e.currentTarget.style.borderColor = BRD}
           >
             {/* Header */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "14px" }}>
-              <span style={{ fontFamily: SERIF, fontSize: "17px", color: T1, fontWeight: "400" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "14px", gap: "10px" }}>
+              <span style={{ fontFamily: SERIF, fontSize: isMobile ? "15px" : "17px", color: T1, fontWeight: "400" }}>
                 {b.restaurant_name}
               </span>
               {statusPill(b.status)}
             </div>
 
             {/* Details */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 20px", marginBottom: "12px" }}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
+              gap: "6px 20px",
+              marginBottom: "12px",
+            }}>
               {[
                 { label: "Date",   val: b.date },
                 { label: "Time",   val: b.time },
@@ -213,7 +223,12 @@ function MyBookings() {
               {(b.status === "Pending" || b.status === "confirmed") && (
                 <button
                   onClick={() => cancelBooking(b.booking_id)}
-                  style={{ padding: "7px 16px", background: "rgba(224,92,92,0.1)", color: "#e05c5c", border: "1px solid rgba(224,92,92,0.25)", borderRadius: "7px", cursor: "pointer", fontFamily: SANS, fontSize: "13px", fontWeight: "500", transition: "all 0.2s" }}
+                  style={{
+                    padding: "7px 16px", background: "rgba(224,92,92,0.1)", color: "#e05c5c",
+                    border: "1px solid rgba(224,92,92,0.25)", borderRadius: "7px",
+                    cursor: "pointer", fontFamily: SANS, fontSize: "13px", fontWeight: "500",
+                    transition: "all 0.2s", flex: isMobile ? "1" : "none",
+                  }}
                   onMouseEnter={e => { e.currentTarget.style.background = "#e05c5c"; e.currentTarget.style.color = "white"; }}
                   onMouseLeave={e => { e.currentTarget.style.background = "rgba(224,92,92,0.1)"; e.currentTarget.style.color = "#e05c5c"; }}
                 >
@@ -223,7 +238,12 @@ function MyBookings() {
               {b.status === "completed" && !submittedIds.includes(b.booking_id) && (
                 <button
                   onClick={() => openReview(b)}
-                  style={{ padding: "7px 16px", background: GOLD_DIM, color: GOLD, border: `1px solid rgba(201,169,110,0.25)`, borderRadius: "7px", cursor: "pointer", fontFamily: SANS, fontSize: "13px", fontWeight: "600", transition: "all 0.2s" }}
+                  style={{
+                    padding: "7px 16px", background: GOLD_DIM, color: GOLD,
+                    border: `1px solid rgba(201,169,110,0.25)`, borderRadius: "7px",
+                    cursor: "pointer", fontFamily: SANS, fontSize: "13px", fontWeight: "600",
+                    transition: "all 0.2s", flex: isMobile ? "1" : "none",
+                  }}
                   onMouseEnter={e => { e.currentTarget.style.background = GOLD; e.currentTarget.style.color = "#0e0f0d"; }}
                   onMouseLeave={e => { e.currentTarget.style.background = GOLD_DIM; e.currentTarget.style.color = GOLD; }}
                 >
@@ -238,13 +258,13 @@ function MyBookings() {
         ))}
       </div>
 
-      {/* ── Review Modal ─────────────────────────────────── */}
+      {/* Review Modal */}
       {reviewModal && (
         <div
           onClick={e => { if (e.target === e.currentTarget) closeReview(); }}
-          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999, backdropFilter: "blur(4px)" }}
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999, backdropFilter: "blur(4px)", padding: "16px" }}
         >
-          <div style={{ background: S2, border: `1px solid ${BRD2}`, borderRadius: "20px", padding: "32px", width: "440px", maxWidth: "94vw", boxShadow: "0 24px 60px rgba(0,0,0,0.6)", fontFamily: SANS }}>
+          <div style={{ background: S2, border: `1px solid ${BRD2}`, borderRadius: "20px", padding: isMobile ? "24px 20px" : "32px", width: "100%", maxWidth: "440px", boxShadow: "0 24px 60px rgba(0,0,0,0.6)", fontFamily: SANS }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
               <h3 style={{ fontFamily: SERIF, fontSize: "20px", fontWeight: "400", color: T1, margin: 0 }}>Write a review</h3>
               <button onClick={closeReview} style={{ background: "none", border: "none", color: T3, fontSize: "18px", cursor: "pointer", lineHeight: 1, padding: "4px" }}>✕</button>
@@ -253,10 +273,9 @@ function MyBookings() {
               {reviewModal.restaurant_name} · {reviewModal.date}
             </p>
 
-            {/* Stars */}
             <p style={{ fontSize: "11px", fontWeight: "500", letterSpacing: "0.07em", textTransform: "uppercase", color: T3, marginBottom: "10px" }}>Rating</p>
             <div style={{ display: "flex", gap: "8px", marginBottom: "20px" }}>
-              {[1,2,3,4,5].map(star => (
+              {[1, 2, 3, 4, 5].map(star => (
                 <span key={star} onClick={() => !reviewResult && setReviewRating(star)}
                   style={{ fontSize: "28px", cursor: reviewResult ? "default" : "pointer", color: star <= reviewRating ? GOLD : S3, transition: "all 0.15s", transform: star <= reviewRating ? "scale(1.15)" : "scale(1)", display: "inline-block" }}>
                   ★
@@ -276,7 +295,6 @@ function MyBookings() {
               onBlur={e  => { e.target.style.borderColor = BRD;  e.target.style.boxShadow = "none"; }}
             />
 
-            {/* Sentiment result */}
             {reviewResult && (
               <div style={{ marginTop: "16px", background: S3, border: `1px solid ${BRD2}`, borderRadius: "12px", padding: "18px", textAlign: "center" }}>
                 <p style={{ fontSize: "28px", margin: "0 0 6px" }}>{reviewResult.emoji}</p>

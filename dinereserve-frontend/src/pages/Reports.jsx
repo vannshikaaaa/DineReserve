@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import API from "../api/axios";
 import Chart from "chart.js/auto";
 
-// ── Design tokens (operator — cool) ──────────────────────────
 const BG   = "#0d0f12";
 const S1   = "#131619";
-const S2   = "#191c21";
 const S3   = "#1f2329";
 const BLUE  = "#5b8def";
 const T1   = "#e8ecf0";
@@ -22,11 +20,18 @@ function Reports() {
   const pieRef      = useRef(null);
   const pieInstance = useRef(null);
 
-  const [restaurants, setRestaurants]   = useState([]);
-  const [selectedRest, setSelectedRest] = useState("");
+  const [restaurants, setRestaurants]     = useState([]);
+  const [selectedRest, setSelectedRest]   = useState("");
   const [sentimentData, setSentimentData] = useState(null);
   const [sentimentLoading, setSentimentLoading] = useState(false);
   const [sentimentError, setSentimentError]     = useState("");
+  const [isMobile, setIsMobile]                 = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     fetchReports();
@@ -36,7 +41,6 @@ function Reports() {
   useEffect(() => {
     if (!sentimentData || !pieRef.current) return;
     if (pieInstance.current) pieInstance.current.destroy();
-
     const { positive_count, neutral_count, negative_count } = sentimentData;
     pieInstance.current = new Chart(pieRef.current, {
       type: "doughnut",
@@ -45,7 +49,7 @@ function Reports() {
         datasets: [{
           data: [positive_count, neutral_count, negative_count],
           backgroundColor: ["rgba(76,175,125,0.8)", "rgba(138,144,153,0.5)", "rgba(224,92,92,0.8)"],
-          borderColor:     ["#4caf7d", "#454952", "#e05c5c"],
+          borderColor: ["#4caf7d", "#454952", "#e05c5c"],
           borderWidth: 1,
         }],
       },
@@ -55,12 +59,7 @@ function Reports() {
         plugins: {
           legend: {
             position: "bottom",
-            labels: {
-              color: T2,
-              font: { size: 13, family: SANS },
-              padding: 16,
-              usePointStyle: true,
-            },
+            labels: { color: T2, font: { size: 13, family: SANS }, padding: 16, usePointStyle: true },
           },
           tooltip: {
             callbacks: {
@@ -70,11 +69,7 @@ function Reports() {
                 return ` ${ctx.label}: ${ctx.parsed} (${pct}%)`;
               },
             },
-            backgroundColor: S3,
-            titleColor: T1,
-            bodyColor: T2,
-            borderColor: BRD2,
-            borderWidth: 1,
+            backgroundColor: S3, titleColor: T1, bodyColor: T2, borderColor: BRD2, borderWidth: 1,
           },
         },
       },
@@ -91,21 +86,17 @@ function Reports() {
           labels: res.data.labels,
           datasets: [{
             label: "Bookings",
-            data:  res.data.bookings,
+            data: res.data.bookings,
             backgroundColor: "rgba(91,141,239,0.6)",
-            borderColor:     "rgba(91,141,239,0.9)",
-            borderWidth: 1,
-            borderRadius: 4,
+            borderColor: "rgba(91,141,239,0.9)",
+            borderWidth: 1, borderRadius: 4,
           }],
         },
         options: {
           responsive: true,
           plugins: {
             legend: { labels: { color: T2, font: { size: 12, family: SANS } } },
-            tooltip: {
-              backgroundColor: S3, titleColor: T1, bodyColor: T2,
-              borderColor: BRD2, borderWidth: 1,
-            },
+            tooltip: { backgroundColor: S3, titleColor: T1, bodyColor: T2, borderColor: BRD2, borderWidth: 1 },
           },
           scales: {
             x: { ticks: { color: T3, font: { size: 11, family: SANS } }, grid: { color: "rgba(255,255,255,0.04)" } },
@@ -126,17 +117,13 @@ function Reports() {
 
   const fetchSentiment = async () => {
     if (!selectedRest) return;
-    setSentimentLoading(true);
-    setSentimentError("");
-    setSentimentData(null);
+    setSentimentLoading(true); setSentimentError(""); setSentimentData(null);
     try {
       const res = await API.get(`/reviews/${selectedRest}/sentiment-summary`);
       setSentimentData(res.data);
     } catch (err) {
       setSentimentError(err.response?.data?.detail || "Failed to load sentiment.");
-    } finally {
-      setSentimentLoading(false);
-    }
+    } finally { setSentimentLoading(false); }
   };
 
   const overallColor = (overall) => {
@@ -148,22 +135,22 @@ function Reports() {
 
   return (
     <div style={{ minHeight: "100vh", background: BG, fontFamily: SANS, paddingBottom: "60px" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 24px" }}>
+      <div style={{ maxWidth: "900px", margin: "0 auto", padding: isMobile ? "24px 16px" : "40px 24px" }}>
 
-        <h1 style={{ fontFamily: SERIF, fontSize: "28px", fontWeight: "400", color: T1, marginBottom: "32px" }}>
+        <h1 style={{ fontFamily: SERIF, fontSize: isMobile ? "22px" : "28px", fontWeight: "400", color: T1, marginBottom: "32px" }}>
           Reports & Analytics
         </h1>
 
-        {/* Bookings bar chart */}
-        <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: "28px", marginBottom: "20px" }}>
+        {/* Bar chart */}
+        <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: isMobile ? "20px 16px" : "28px", marginBottom: "20px" }}>
           <h2 style={{ fontFamily: SERIF, fontSize: "18px", fontWeight: "400", color: T1, marginBottom: "20px" }}>
             Bookings per day
           </h2>
           <canvas ref={barRef} />
         </div>
 
-        {/* Sentiment analysis */}
-        <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: "28px" }}>
+        {/* Sentiment */}
+        <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: isMobile ? "20px 16px" : "28px" }}>
           <h2 style={{ fontFamily: SERIF, fontSize: "18px", fontWeight: "400", color: T1, marginBottom: "4px" }}>
             Customer sentiment
           </h2>
@@ -175,14 +162,14 @@ function Reports() {
             <select
               value={selectedRest}
               onChange={e => { setSelectedRest(e.target.value); setSentimentData(null); setSentimentError(""); }}
-              style={{ flex: 1, minWidth: "200px", background: S3, border: `1px solid ${BRD2}`, borderRadius: "8px", color: T1, padding: "9px 12px", fontFamily: SANS, fontSize: "13px", outline: "none", cursor: "pointer" }}
+              style={{ flex: 1, minWidth: "160px", background: S3, border: `1px solid ${BRD2}`, borderRadius: "8px", color: T1, padding: "9px 12px", fontFamily: SANS, fontSize: "13px", outline: "none", cursor: "pointer" }}
             >
               {restaurants.map(r => <option key={r._id} value={r._id}>{r.name}</option>)}
             </select>
             <button
               onClick={fetchSentiment}
               disabled={sentimentLoading || !selectedRest}
-              style={{ padding: "9px 22px", background: sentimentLoading ? S3 : BLUE, color: sentimentLoading ? T3 : "#0d0f12", border: "none", borderRadius: "8px", fontFamily: SANS, fontSize: "13px", fontWeight: "600", cursor: sentimentLoading ? "not-allowed" : "pointer", whiteSpace: "nowrap", transition: "all 0.2s" }}
+              style={{ padding: "9px 22px", background: sentimentLoading ? S3 : BLUE, color: sentimentLoading ? T3 : "#0d0f12", border: "none", borderRadius: "8px", fontFamily: SANS, fontSize: "13px", fontWeight: "600", cursor: sentimentLoading ? "not-allowed" : "pointer", whiteSpace: "nowrap", transition: "all 0.2s", width: isMobile ? "100%" : "auto" }}
             >
               {sentimentLoading ? "Analysing..." : "Analyse reviews"}
             </button>
@@ -232,7 +219,7 @@ function Reports() {
                     ))}
                   </div>
                 </div>
-                <div style={{ maxWidth: "320px", margin: "0 auto" }}>
+                <div style={{ maxWidth: isMobile ? "260px" : "320px", margin: "0 auto" }}>
                   <canvas ref={pieRef} />
                 </div>
               </>

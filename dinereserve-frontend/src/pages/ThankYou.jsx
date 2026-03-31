@@ -53,7 +53,6 @@ function ThankYou() {
     <div style={{ minHeight: "100vh", background: BG, fontFamily: SANS, paddingBottom: "60px" }}>
       <div style={{ maxWidth: "680px", margin: "0 auto", padding: isMobile ? "28px 16px" : "48px 24px" }}>
 
-        {/* Success header */}
         <div style={{ textAlign: "center", marginBottom: "36px" }}>
           <div style={{ width: "56px", height: "56px", background: "rgba(76,175,125,0.12)", border: "1px solid rgba(76,175,125,0.25)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
             <span style={{ color: "#4caf7d", fontSize: "22px" }}>✓</span>
@@ -64,7 +63,6 @@ function ThankYou() {
           <p style={{ fontSize: "14px", color: T3 }}>Your table is reserved. See you soon.</p>
         </div>
 
-        {/* Booking details */}
         <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: isMobile ? "16px" : "24px", marginBottom: "28px" }}>
           {[
             { label: "Booking ID",  val: booking.booking_id || booking.id },
@@ -83,7 +81,6 @@ function ThankYou() {
           ))}
         </div>
 
-        {/* Dish recommendations */}
         <div style={{ marginBottom: "28px" }}>
           <p style={{ fontSize: "11px", fontWeight: "500", letterSpacing: "0.08em", textTransform: "uppercase", color: T3, marginBottom: "16px" }}>
             Recommended dishes
@@ -115,7 +112,6 @@ function ThankYou() {
           )}
         </div>
 
-        {/* Buttons */}
         <div style={{ display: "flex", gap: "12px", flexWrap: isMobile ? "wrap" : "nowrap" }}>
           <button
             onClick={() => navigate("/home")}

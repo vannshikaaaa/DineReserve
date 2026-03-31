@@ -82,7 +82,7 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* ── Floating Button ───────────────────────────────── */}
+
       <button
         onClick={() => setIsOpen((o) => !o)}
         title="Chat with DineBot"
@@ -127,7 +127,6 @@ export default function Chatbot() {
         )}
       </button>
 
-      {/* ── Chat Window ───────────────────────────────────── */}
       {isOpen && (
         <div style={{
           position:      "fixed",
@@ -146,7 +145,6 @@ export default function Chatbot() {
           fontFamily:    "'Segoe UI', sans-serif",
         }}>
 
-          {/* ── Header ──────────────────────────────────── */}
           <div style={{
             background:     "linear-gradient(135deg, #1976d2 0%, #0d47a1 100%)",
             padding:        "14px 16px",
@@ -195,7 +193,6 @@ export default function Chatbot() {
             </button>
           </div>
 
-          {/* ── Messages ────────────────────────────────── */}
           <div style={{
             flex:          1,
             overflowY:     "auto",
@@ -230,7 +227,6 @@ export default function Chatbot() {
                   </div>
                 )}
 
-                {/* Message bubble */}
                 <div style={{
                   maxWidth:     "80%",
                   padding:      "9px 13px",
@@ -254,7 +250,6 @@ export default function Chatbot() {
               </div>
             ))}
 
-            {/* Typing indicator */}
             {loading && (
               <div style={{ display: "flex", alignItems: "flex-end", gap: "7px" }}>
                 <div style={{
@@ -295,7 +290,6 @@ export default function Chatbot() {
             <div ref={bottomRef} />
           </div>
 
-          {/* ── Quick Suggestions ───────────────────────── */}
           <div style={{
             padding:        "8px 10px",
             background:     "#f0f4ff",
@@ -336,7 +330,6 @@ export default function Chatbot() {
             ))}
           </div>
 
-          {/* ── Input ───────────────────────────────────── */}
           <div style={{
             padding:    "10px",
             background: "#fff",
@@ -409,7 +402,6 @@ export default function Chatbot() {
         </div>
       )}
 
-      {/* ── Animations ────────────────────────────────────── */}
       <style>{`
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(16px) scale(0.96); }

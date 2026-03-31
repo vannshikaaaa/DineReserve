@@ -141,7 +141,6 @@ function Reports() {
           Reports & Analytics
         </h1>
 
-        {/* Bar chart */}
         <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: isMobile ? "20px 16px" : "28px", marginBottom: "20px" }}>
           <h2 style={{ fontFamily: SERIF, fontSize: "18px", fontWeight: "400", color: T1, marginBottom: "20px" }}>
             Bookings per day
@@ -149,7 +148,6 @@ function Reports() {
           <canvas ref={barRef} />
         </div>
 
-        {/* Sentiment */}
         <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: isMobile ? "20px 16px" : "28px" }}>
           <h2 style={{ fontFamily: SERIF, fontSize: "18px", fontWeight: "400", color: T1, marginBottom: "4px" }}>
             Customer sentiment

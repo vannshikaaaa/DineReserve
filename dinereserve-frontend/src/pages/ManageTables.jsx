@@ -144,14 +144,12 @@ export default function ManageTables() {
           </div>
         </div>
 
-        {/* Table count */}
         {!loading && (
           <p style={{ fontSize: "12px", color: T3, marginBottom: "16px", letterSpacing: "0.04em" }}>
             {tables.length} table{tables.length !== 1 ? "s" : ""} configured
           </p>
         )}
 
-        {/* Table list */}
         {loading ? (
           <p style={{ color: T3, fontSize: "14px", textAlign: "center", padding: "40px" }}>
             Loading tables...

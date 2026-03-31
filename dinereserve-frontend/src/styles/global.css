@@ -63,7 +63,6 @@
   text-align: center;
 }
 
-/* ── Navbar ── */
 .navbar {
   position: sticky;
   top: 0;
@@ -112,7 +111,6 @@
   background: var(--danger-bg);
 }
 
-/* ── Table ── */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -135,7 +133,6 @@
 }
 .data-table tr:hover td { background: var(--bg-elevated); }
 
-/* ── Stat card ── */
 .stat-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -156,7 +153,6 @@
   line-height: 1;
 }
 
-/* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
   .page-container {
     padding: 16px 12px;

@@ -37,7 +37,6 @@ function App() {
         <Route path="/reports"           element={<Reports />}         />
       </Routes>
 
-      {/* Chatbot floats on every page */}
       <Chatbot />
     </>
   );

@@ -117,7 +117,6 @@ function TableBooking() {
           </div>
         )}
 
-        {/* Booking form */}
         <div style={{ background: S1, border: `1px solid ${BRD}`, borderRadius: "16px", padding: isMobile ? "20px 16px" : "28px", marginBottom: "20px" }}>
 
           {/* Date and Time */}
@@ -162,7 +161,6 @@ function TableBooking() {
             />
           </div>
 
-          {/* Demand badge */}
           {demandLoading && <p style={{ fontSize: "13px", color: T3, marginBottom: "12px" }}>Checking demand...</p>}
           {demand && !demandLoading && (() => {
             const d = demandCfg[demand.demand_level] || demandCfg.Low;
@@ -186,7 +184,6 @@ function TableBooking() {
 
         {loading && <p style={{ color: T3, fontSize: "13px" }}>Loading tables...</p>}
 
-        {/* Table grid */}
         {tables.length > 0 && (
           <div style={{ marginBottom: "16px" }}>
             <p style={{ fontSize: "11px", fontWeight: "500", letterSpacing: "0.07em", textTransform: "uppercase", color: T3, marginBottom: "14px" }}>

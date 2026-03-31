@@ -60,7 +60,6 @@ async def build_system_prompt() -> str:
             capacity    = r.get("max_capacity", "")
             description = r.get("description", "")
 
-            # Build info line
             info = f"{i}. {name} — {cuisine}, {r_type}"
             if price_range:
                 info += f", {price_range}"

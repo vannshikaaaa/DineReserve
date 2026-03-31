@@ -57,7 +57,6 @@ export function RestaurantDetails() {
           boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
         }}>
 
-          {/* Image */}
           <div>
             <img
               src={restaurant.image}
@@ -73,7 +72,6 @@ export function RestaurantDetails() {
             />
           </div>
 
-          {/* Info */}
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <h1 style={{
               fontFamily: SERIF,

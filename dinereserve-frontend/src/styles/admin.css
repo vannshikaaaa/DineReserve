@@ -1,5 +1,3 @@
-/* admin.css — AdminDashboard, ManageTables, Reports */
-
 .admin-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -22,7 +20,6 @@
   margin-top: 4px;
 }
 
-/* Stat cards grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -53,7 +50,6 @@
 }
 .stat-card-accent .stat-card-value { color: var(--accent); }
 
-/* Admin section panel */
 .admin-section {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -73,7 +69,6 @@
   margin-bottom: 20px;
 }
 
-/* Manage Tables */
 .add-table-row {
   display: flex;
   gap: 10px;
@@ -111,7 +106,6 @@
 .table-status-available { color: var(--success); font-weight: 500; font-size: 13px; }
 .table-status-booked    { color: var(--warning); font-weight: 500; font-size: 13px; }
 
-/* Admin buttons */
 .admin-btn {
   padding: 9px 18px;
   background: var(--accent);
@@ -136,7 +130,6 @@
   box-shadow: none;
 }
 
-/* Peak hour bar chart */
 .peak-bar-row {
   display: flex;
   align-items: center;
@@ -179,7 +172,6 @@
   letter-spacing: 0.04em;
 }
 
-/* Reports select */
 .reports-select {
   background: var(--bg-elevated);
   border: 1px solid var(--border);

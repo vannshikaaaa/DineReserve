@@ -56,7 +56,6 @@ export default function Profile() {
             overflow: "hidden",
             boxShadow: "0 16px 48px rgba(0,0,0,0.5)",
           }}>
-            {/* Header band */}
             <div style={{
               padding: isMobile ? "20px 20px 18px" : "28px 28px 24px",
               borderBottom: `1px solid ${BORDER}`,
@@ -89,8 +88,7 @@ export default function Profile() {
               </div>
             </div>
 
-            {/* Info rows */}
-            {[
+           {[
               { label: "Email address", value: profile.email },
               { label: "Total bookings", value: profile.total_bookings ?? 0 },
             ].map(({ label, value }) => (
@@ -119,7 +117,6 @@ export default function Profile() {
               </div>
             ))}
 
-            {/* Sign out */}
             <div style={{ padding: isMobile ? "16px 20px" : "20px 28px" }}>
               <button
                 onClick={logout}

@@ -161,11 +161,6 @@ def predict_table_demand(
         "availability_advice": advice,
     }
 
-# ─── 5. Sentiment Analysis on Reviews ────────────────────────
-# Algorithm: VADER (Valence Aware Dictionary and sEntiment Reasoner)
-# No training needed — pre-built sentiment lexicon
-# pip install vaderSentiment
-
 def analyze_sentiment(review_text: str) -> Dict:
    
     try:
@@ -203,11 +198,6 @@ def analyze_sentiment(review_text: str) -> Dict:
 
 
 def analyze_reviews_bulk(reviews: List[str]) -> Dict:
-    """
-    Analyzes a list of review texts and returns summary stats.
-    Used by Admin Reports page to show sentiment pie chart.
-    Returns: counts and percentages for Positive/Neutral/Negative
-    """
     if not reviews:
         return {
             "total":            0,
@@ -250,22 +240,17 @@ def analyze_reviews_bulk(reviews: List[str]) -> Dict:
     }
 
 
-# ─── 6. Cancellation Risk Prediction ─────────────────────────
-# Algorithm: Random Forest Classifier
-# Same as no-show model but trained on cancelled status
-# Training script: ai/training/train_cancel_model.py
-
 def predict_cancellation(hour: int, day_of_week: int, month: int, guests: int) -> Dict:
 
     data = _load("cancel", "ai/models/cancel_model.pkl")
 
     if data is None:
         risk_score = 0
-        if day_of_week in [5, 6]:   # weekend
+        if day_of_week in [5, 6]:   
             risk_score += 1
-        if guests >= 6:              # large groups cancel more
+        if guests >= 6:              
             risk_score += 1
-        if month in [12, 1, 2]:     # holiday months
+        if month in [12, 1, 2]:     
             risk_score += 1
 
         if risk_score == 0:

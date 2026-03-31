@@ -175,7 +175,6 @@ function MyBookings() {
             onMouseEnter={e => e.currentTarget.style.borderColor = BRD2}
             onMouseLeave={e => e.currentTarget.style.borderColor = BRD}
           >
-            {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "14px", gap: "10px" }}>
               <span style={{ fontFamily: SERIF, fontSize: isMobile ? "15px" : "17px", color: T1, fontWeight: "400" }}>
                 {b.restaurant_name}
@@ -183,7 +182,6 @@ function MyBookings() {
               {statusPill(b.status)}
             </div>
 
-            {/* Details */}
             <div style={{
               display: "grid",
               gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
@@ -210,7 +208,6 @@ function MyBookings() {
               )}
             </div>
 
-            {/* Risk badges */}
             {(b.status === "Pending" || b.status === "confirmed") && (
               <div style={{ borderTop: `1px solid ${BRD}`, paddingTop: "12px", marginBottom: "12px" }}>
                 {riskBadge(riskScores[b.booking_id],  "noshow")}
@@ -218,7 +215,6 @@ function MyBookings() {
               </div>
             )}
 
-            {/* Actions */}
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
               {(b.status === "Pending" || b.status === "confirmed") && (
                 <button
@@ -258,7 +254,6 @@ function MyBookings() {
         ))}
       </div>
 
-      {/* Review Modal */}
       {reviewModal && (
         <div
           onClick={e => { if (e.target === e.currentTarget) closeReview(); }}
